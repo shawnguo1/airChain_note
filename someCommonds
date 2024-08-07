@@ -1,0 +1,33 @@
+How to restart
+sudo systemctl stop tracksd
+cd /data/airchains/tracks/
+go run cmd/main.go rollback
+go run cmd/main.go rollback
+go run cmd/main.go rollback
+
+sudo systemctl restart tracksd
+
+
+How to change gas
+sed -i.bak 's/utilis\.GenerateRandomWithFavour(1200, 2400, \[2\]int{1500, 2000}, 0\.7)/utilis.GenerateRandomWithFavour(24000, 34000, [2]int{26000, 30000}, 0.7)/' "./junction/createStation.go"
+sed -i 's/gasFees := fmt.Sprintf("%damf", gas)/gasFees := fmt.Sprintf("%damf", 20*gas)/' "./junction/verifyPod.go"
+sed -i 's/gasFees := fmt.Sprintf("%damf", gas)/gasFees := fmt.Sprintf("%damf", 20*gas)/' "./junction/validateVRF.go"
+sed -i 's/gasFees := fmt.Sprintf("%damf", gas)/gasFees := fmt.Sprintf("%damf", 30*gas)/' "./junction/submitPod.go"
+
+
+
+Some good rpcs
+https://airchains-rpc.kubenode.xyz/
+RPC PUBLIC LIST
+https://airchains-testnet-rpc.cosmonautstakes.com/
+https://junction-testnet-rpc.synergynodes.com/
+https://rpc-t.airchains.safeblock.space/
+https://airchains-rpc.kubenode.xyz/
+http://airchains-rpc1.kubenode.xyz:43457/
+
+https://airchains-rpc.tws.im/
+
+https://junction-testnet-rpc.synergynodes.com/
+https://junction-testnet-rpc.nodesync.top/
+
+https://airchains-rpc-testnet.zulnaaa.com/
