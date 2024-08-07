@@ -7,6 +7,9 @@ go run cmd/main.go rollback
 
 sudo systemctl restart tracksd
 
+How to logs
+journalctl -u tracksd -f
+
 
 How to change gas
 sed -i.bak 's/utilis\.GenerateRandomWithFavour(1200, 2400, \[2\]int{1500, 2000}, 0\.7)/utilis.GenerateRandomWithFavour(24000, 34000, [2]int{26000, 30000}, 0.7)/' "./junction/createStation.go"
@@ -14,6 +17,20 @@ sed -i 's/gasFees := fmt.Sprintf("%damf", gas)/gasFees := fmt.Sprintf("%damf", 2
 sed -i 's/gasFees := fmt.Sprintf("%damf", gas)/gasFees := fmt.Sprintf("%damf", 20*gas)/' "./junction/validateVRF.go"
 sed -i 's/gasFees := fmt.Sprintf("%damf", gas)/gasFees := fmt.Sprintf("%damf", 30*gas)/' "./junction/submitPod.go"
 
+
+How to update
+systemctl stop tracksd 
+cd /root/tracks && git reset --hard HEAD && git pull
+systemctl start tracksd
+
+
+How to delete 
+sudo systemctl stop wasmstationd.service
+sudo systemctl disable wasmstationd.service
+sudo systemctl stop stationd.service
+sudo systemctl disable stationd.service
+rm -rf ~/.wasmstationd
+rm -rf ~/.tracks
 
 
 Some good rpcs
